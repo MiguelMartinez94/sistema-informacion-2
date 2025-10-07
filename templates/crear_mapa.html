@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Mapa</title>
+</head>
+<body>
+
+    <header>
+        <h1>Crear un Nuevo Mapa</h1>
+    </header>
+
+    <main>
+        <form action="/mapas/crear" method="post">
+            <div>
+                <label for="nombre">Nombre del Mapa:</label>
+                <input type="text"  name="nombre" >
+            </div>
+            <br>
+            <div>
+                <label for="descripcion">Descripción:</label>
+                <textarea  name="descripcion" rows="4" cols="50"></textarea>
+            </div>
+            <br>
+            <div>
+                <button type="submit">Guardar Mapa</button>
+            </div>
+        </form>
+        
+        <p><a href="/">Volver al inicio</a></p>
+    </main>
+
+</body>
+</html>

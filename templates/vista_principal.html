@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Mapas</title>
+</head>
+<body>
+
+    <header>
+        <h1>Bienvenido al Sistema de Gestión de Mapas SVG</h1>
+    </header>
+
+    <main>
+        <p>Mapa principal del sistema. Cada municipio es un elemento con el que podrás interactuar.</p>
+        
+        <div>
+            {% raw %}{% include 'components/mapa_svg.html' %}{% endraw %}
+        </div>
+        
+        <nav>
+            <h2>Acciones</h2>
+            <ul>
+                <li><a href="/crear_mapa">Crear un nuevo mapa</a></li>
+                <li><a href="/visualizar_mapas">Visualizar otros mapas existentes</a></li>
+                <li><a href="/modificar_mapa">Modificar un mapa</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer>
+        <p>Proyecto desarrollado con Flask y MySQL.</p>
+    </footer>
+
+</body>
+</html>
