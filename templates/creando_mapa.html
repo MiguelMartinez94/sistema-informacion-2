@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editando Mapa: {{ mapa.nombre }}</title>
+</head>
+<body>
+    <header>
+        <h1>Editando Mapa: {{ mapa.nombre }}</h1>
+        <p>{{ mapa.descripcion }}</p>
+    </header>
+
+    <main style="display: flex;">
+        <div style="flex: 1; padding: 10px;">
+            <h2>Mapa</h2>
+            {% include 'components/mapa_svg.html' %}
+        </div>
+
+        <div style="flex: 1; padding: 10px;">
+            <h2>Información del Municipio</h2>
+            <form action="{{ url_for('mapas.guardar_contenido_municipio') }}" method="post" enctype="multipart/form-data">
+                
+                <input type="hidden" id="id_municipio" name="id_municipio">
+
+                <div>
+                    <label for="municipio_nombre">Municipio:</label>
+                    <input type="text" id="municipio_nombre" name="municipio_nombre" readonly>
+                </div>
+                <br>
+                <div>
+                    <label for="color">Color:</label>
+                    <input type="color" id="color" name="color">
+                </div>
+                <br>
+                <div>
+                    <label for="detalle">Descripción (Detalle):</label>
+                    <textarea id="detalle" name="detalle" rows="4" cols="50"></textarea>
+                </div>
+                <br>
+                <div>
+                    <label for="imagen">Imagen:</label>
+                    <input type="file" id="imagen" name="imagen" accept="image/*">
+                </div>
+                <br>
+                <div>
+                    <button type="submit">Guardar Contenido</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p><a href="/">Volver a la página principal</a></p>
+    </footer>
+
+    <script>
+        const municipiosData = {{ municipios|tojson }};
+
+        function normalizarNombre(texto) {
+            return texto
+                .toLowerCase()
+                .replace(/\s/g, '')
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const municipiosPaths = document.querySelectorAll('.municipio-path');
+
+            municipiosPaths.forEach(path => {
+                path.addEventListener('click', function () {
+                    
+                    municipiosPaths.forEach(p => p.classList.remove('seleccionado'));
+                    this.classList.add('seleccionado');
+
+                    const idSvgNormalizado = normalizarNombre(this.id);
+                    
+                    const municipioSeleccionado = municipiosData.find(m => {
+                        const nombreDbNormalizado = normalizarNombre(m.nombre);
+                        return nombreDbNormalizado === idSvgNormalizado;
+                    });
+
+                    if (municipioSeleccionado) {
+                        document.getElementById('id_municipio').value = municipioSeleccionado.id_municipio;
+                        document.getElementById('municipio_nombre').value = municipioSeleccionado.nombre;
+                        document.getElementById('color').value = municipioSeleccionado.color || '#e3f2fd';
+                        document.getElementById('detalle').value = municipioSeleccionado.detalle || '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

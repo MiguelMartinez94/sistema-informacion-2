@@ -11,5 +11,5 @@ class Config:
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'Kesadilla94'
-    MYSQL_DB = 'queratro_mapas_2'
+    MYSQL_DB = 'queretaro_mapas_2'
     

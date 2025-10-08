@@ -15,13 +15,13 @@
         <p>Mapa principal del sistema. Cada municipio es un elemento con el que podrás interactuar.</p>
         
         <div>
-            {% raw %}{% include 'components/mapa_svg.html' %}{% endraw %}
+            {% include 'components/mapa_svg.html' %}
         </div>
         
         <nav>
             <h2>Acciones</h2>
             <ul>
-                <li><a href="/crear_mapa">Crear un nuevo mapa</a></li>
+                <li><a href="{{ url_for('mapas.vista_crear_mapa') }}">Crear un nuevo mapa</a></li>
                 <li><a href="/visualizar_mapas">Visualizar otros mapas existentes</a></li>
                 <li><a href="/modificar_mapa">Modificar un mapa</a></li>
             </ul>
